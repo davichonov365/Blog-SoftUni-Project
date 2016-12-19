@@ -1,0 +1,38 @@
+﻿@model Blog.Models.Category
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+
+<h2>Details</h2>
+
+<nav class="w3-sidenav w3-light-grey" style="width:25%">
+
+    <a class="w3-green" href="#">Категории</a>
+    @foreach (var category in Model)
+    {
+        @Html.ActionLink(string.Format($"{category.Name} ({category.Articles.Count})"),
+                        "ListArticles", "Home", new { @categoryId = category.Id }, null)
+    }
+</nav>
+
+<div>
+    <h4>Category</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

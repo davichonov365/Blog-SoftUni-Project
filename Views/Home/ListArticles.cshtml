@@ -1,0 +1,69 @@
+﻿@model List<Blog.Models.Article>
+
+@{
+    ViewBag.Title = "List";
+}
+
+
+
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+
+<nav class="w3-sidenav w3-light-grey" style="width:25%">
+
+    <a class="w3-green" href="#">Категории</a>
+    @foreach (var title in Model)
+    {
+        <h6>
+            @Html.ActionLink(@title.Title, "Details", "Article", new { @id = title.Id }, null)
+        </h6>
+    }
+    <a class="w3-green" href="#">Приятели</a>
+    <a href="https://softuni.bg/">SoftUni Bg</a>
+    <a class="w3-green" href="#">Намери ни в ....</a>
+    <p></p>
+    <div class="fb-like" data-href="https://www.facebook.com/JokesXXL/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+</nav>
+<div class="container-fluid" style="margin-left:25%" >
+        <div class="visible-lg-block">
+            @foreach (var article in Model)
+            {
+                <div class="col-sm-8">
+                    <article>
+                        <header>
+                            <h2>
+                                @Html.ActionLink(@article.Title, "Details", "Article", new { @id = article.Id }, null)
+                            </h2>
+                        </header>
+                        <div class="well">
+                            @article.Content
+                        </div>
+                       
+                            <footer>
+                                <div class="pull-left">
+                                    @foreach (var tag in article.Tags)
+                                    {
+                                        <span>@Html.ActionLink(tag.Name, "ListArticlesByTags", "Tag", new { @id = tag.Id }, new { @class = "btn btn-default btn-xs" })</span>
+                                    }
+                                </div>
+                                <small class="author pull-right">
+                                    --Автор @article.Author.FullName
+                                </small>
+                            </footer>
+
+
+
+                        </article>
+                </div>
+            }
+        </div>
+    </div>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=248485451779";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+ <hr />

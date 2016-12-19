@@ -1,0 +1,51 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+
+{
+    <ul class="nav navbar-nav navbar-left">
+        <li>@Html.ActionLink("Вицове.XXL", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    </ul>
+
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-left">
+             @if (User.IsInRole("Admin"))
+             {
+                <li class="btn-group">
+                    <a href="#" class="btn btn-info">Баш Майстора</a>
+                    <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">@Html.ActionLink("Потребители", "List", "User")</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">@Html.ActionLink("Категории", "Index", "Category")</a></li>
+                        <li class="divider"></li>
+                    </ul>
+                </li>
+             }
+            <li>
+                @Html.ActionLink("Разкажи ни ВиЦ", "Create", "Article")
+            </li>
+        </ul>
+                
+    <ul class="nav navbar-nav navbar">
+        <li>
+            @Html.ActionLink("Здравей! "  + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Изход</a></li>
+    </ul>
+    }
+}
+
+else
+{
+    <ul class="nav navbar-nav navbar">
+        <li>@Html.ActionLink("Вицове.XXL", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Регистрирай се!", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Вход", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

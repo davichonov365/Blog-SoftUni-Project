@@ -1,0 +1,58 @@
+﻿@model List<Blog.Models.Category>
+
+
+@{
+    ViewBag.Title = "List";
+}
+
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+
+<nav class="w3-sidenav w3-light-grey" style="width:25%">
+
+    <a class="w3-green" href="#">Категории</a>
+    @foreach (var category in Model)
+    {
+        @Html.ActionLink(string.Format($"{category.Name} ({category.Articles.Count})"),
+                        "ListArticles", "Home", new { @categoryId = category.Id }, null)
+    }
+    <a class="w3-green" href="#">Приятели</a>
+        <a href="https://softuni.bg/">SoftUni Bg</a>
+</nav>
+
+<div class="well" style="margin-left:25%">
+
+    <div class="well">
+
+        <h5>"Всичко е смешно, когато се случи на друг...."   Д. Адисън</h5>
+        <p></p>
+        <img src="~/Images/pic2.jpg" />
+        <img src="~/Images/pic1.jpg" />
+        <p></p>
+    </div>
+    <div class="well">
+
+        <h4>"Безалкохолна бира - първа стъпка към надуваемите жени...."</h4>
+        <p></p>
+        <img src="~/Images/pic3.jpg" />
+        <img src="~/Images/pic4.jpg" />
+        <p></p>
+
+    </div>
+        
+    <div class="well">
+        <h4>"Нищо не укрепва така вярата... както аванса...."</h4>
+        <img src="~/Images/Kotka.png" />
+        <img src="~/Images/pic5.jpg" />
+        <h3>"Наслаждавай се на живота. Дълго време ще си мъртъв...."</h3>
+    </div>
+    <div class="fb-like" data-href="https://www.facebook.com/JokesXXL/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+  </div>
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=248485451779";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>

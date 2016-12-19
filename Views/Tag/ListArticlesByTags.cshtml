@@ -1,0 +1,59 @@
+﻿@model List<Blog.Models.Article>
+
+@{
+    ViewBag.Title = "List";
+}
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+
+<nav class="w3-sidenav w3-light-grey" style="width:25%">
+    <a class="w3-green" href="#">Вицове</a>
+    @foreach (var title in Model)
+    {
+        <h6>
+            @Html.ActionLink(@title.Title, "Details", "Article", new { @id = title.Id }, null)
+        </h6>
+    }
+    <a class="w3-green" href="#">Автори</a>
+    @foreach (var title in Model)
+    {
+        <h6>Aвтор @title.Author.FullName</h6>
+        if (title.Author.FullName== title.Author.FullName)
+        {
+            break;
+        }
+        <h6>Aвтор @title.Author.FullName</h6>
+    }
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        @foreach (var article in Model)
+        {
+            <div class="col-xs-pull-12">
+                <article class="active">
+                    <header>
+                        <h3>
+                            @Html.ActionLink(@article.Title, "Details", "Article", new { @id = article.Id }, null)
+                        </h3>
+                    </header>
+                    <div class="well">
+                        @article.Content
+                    </div>
+                    <footer>
+                        <div class="pull-left">
+                            @foreach (var tag in article.Tags)
+                            {
+                                <span>@Html.ActionLink(tag.Name, "ListArticlesByTags", "Tag", new { @id = tag.Id }, new { @class = "btn btn-default btn-xs" })</span>
+                            }
+                        </div>
+                        <small class="author pull-right">
+                            --Автор @article.Author.FullName
+                        </small>
+                    </footer>
+                </article>
+            </div>
+        }
+    </div>
+</div>
+
+<hr />
